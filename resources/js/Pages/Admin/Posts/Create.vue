@@ -6,57 +6,41 @@ import InputLabel from "@/Components/InputLabel.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
-import VueMultiselect from "vue-multiselect";
 
-defineProps({
-  permissions: Array,
-});
+
 
 const form = useForm({
-  name: "",
-  permissions: [],
+  title: "",
 });
 </script>
 
 <template>
-  <Head title="Create new role" />
+  <Head title="Create new post" />
 
   <AdminLayout>
     <div class="max-w-7xl mx-auto py-4">
       <div class="flex justify-between">
         <Link
-          :href="route('roles.index')"
+          :href="route('posts.index')"
           class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded"
           >Back</Link
         >
       </div>
       <div class="mt-6 max-w-6xl mx-auto bg-slate-100 shadow-lg rounded-lg p-6">
-        <h1 class="text-2xl font-semibold text-indigo-700">Create new role</h1>
-        <form @submit.prevent="form.post(route('roles.store'))">
+        <h1 class="text-2xl font-semibold text-indigo-700">Create new post</h1>
+        <form @submit.prevent="form.post(route('posts.store'))">
           <div class="mt-4">
-            <InputLabel for="name" value="Name" />
+            <InputLabel for="title" value="title" />
             <TextInput
-              id="name"
+              id="title"
               type="text"
               class="mt-1 block w-full"
-              v-model="form.name"
+              v-model="form.title"
               autofocus
-              autocomplete="username"
+              autocomplete="title"
             />
 
-            <InputError class="mt-2" :message="form.errors.name" />
-          </div>
-          <div class="mt-4">
-            <InputLabel for="permissions" value="Permissions" />
-            <VueMultiselect
-              v-model="form.permissions"
-              :options="permissions"
-              :multiple="true"
-              :close-on-select="true"
-              placeholder="Pick some"
-              label="name"
-              track-by="id"
-            />
+            <InputError class="mt-2" :message="form.errors.title" />
           </div>
           <div class="flex items-center mt-4">
             <PrimaryButton
@@ -72,4 +56,3 @@ const form = useForm({
     </div>
   </AdminLayout>
 </template>
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
